@@ -57,7 +57,7 @@ export function handlePairCreated(event: PairCreatedEvent): void {
   context.setString("market", pair);
   context.setString("token0", token0);
   context.setString("token1", token1);
-  SushiPairTemplate.createWithContext(event.params.pair, context);
+  TraderJoePairTemplate.createWithContext(event.params.pair, context);
 }
 
 export function handleMint(event: MintEvent): void {
