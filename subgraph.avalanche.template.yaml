@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: PendleRouter
-    network: mainnet
+    network: {{network}}
     source:
-      address: "0x1b6d3E5Da9004668E14Ca39d1553E9a46Fe842B3"
+      address: "{{pendleRouter}}"
       abi: PendleRouter
-      startBlock: 12638048
+      startBlock: {{pendleRouterStartBlock}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -30,11 +30,11 @@ dataSources:
       file: ./src/mappings/router.ts
   - kind: ethereum/contract
     name: PendleData
-    network: mainnet
+    network: {{network}}
     source:
-      address: "0xE8A6916576832AA5504092C1cCCC46E3bB9491d6"
+      address: "{{pendleData}}"
       abi: PendleData
-      startBlock: 12638042
+      startBlock: {{pendleDataStartBlock}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -48,13 +48,13 @@ dataSources:
         - event: ForgeAdded(indexed bytes32,indexed address)
           handler: handleForgeAdded
       file: ./src/mappings/data.ts
-  - kind: ethereum/contract
-    name: SushiFactory
-    network: mainnet
+  - kind: ethereum
+    name: TraderJoeFactory
+    network: {{network}}
     source:
-      address: "0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac"
-      abi: SushiFactory
-      startBlock: 12638042
+      address: "{{traderJoeFactory}}"
+      abi: TraderJoeFactory
+      startBlock: {{traderJoeFactoryStartBlock}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -62,19 +62,19 @@ dataSources:
       entities:
         - Token
       abis:
-        - name: SushiFactory
-          file: ./abis/SushiFactory.json
-        - name: SushiPair
-          file: ./abis/SushiPair.json
+        - name: TraderJoeFactory
+          file: ./abis/TraderJoeFactory.json
+        - name: TraderJoePair
+          file: ./abis/TraderJoePair.json
       eventHandlers:
         - event: PairCreated(indexed address,indexed address,address,uint256)
           handler: handlePairCreated
-      file: ./src/mappings/sushi.ts
+      file: ./src/mappings/traderJoe.ts
 
 templates:
   - kind: ethereum/contract
     name: IPendleForge
-    network: mainnet
+    network: {{network}}
     source:
       abi: IPendleForge
     mapping:
@@ -95,10 +95,10 @@ templates:
           handler: handleRedeemYieldToken
       file: ./src/mappings/forge.ts
   - kind: ethereum/contract
-    name: SushiPair
-    network: mainnet
+    name: TraderJoePair
+    network: {{network}}
     source:
-      abi: SushiPair
+      abi: TraderJoePair
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -106,8 +106,8 @@ templates:
       entities:
         - Token
       abis:
-        - name: SushiPair
-          file: ./abis/SushiPair.json
+        - name: TraderJoePair
+          file: ./abis/TraderJoePair.json
       eventHandlers:
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
@@ -115,4 +115,4 @@ templates:
           handler: handleBurn
         - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
           handler: handleSwap
-      file: ./src/mappings/sushi.ts
+      file: ./src/mappings/traderJoe.ts

@@ -1,6 +1,100 @@
-type ExampleEntity @entity {
+type Market @entity {
   id: ID!
-  count: BigInt!
-  amount: BigInt! # uint256
-  sendTo: Bytes! # address
+  hash: String!
+  timestamp: BigInt!
+  block: BigInt!
+  marketFactoryId: String!
+  market: String!
+  token0: String!
+  token1: String!
+}
+
+type Join @entity {
+  id: ID!
+  hash: String!
+  timestamp: BigInt!
+  block: BigInt!
+  market: String!
+  token0Amount: BigInt!
+  token1Amount: BigInt!
+  exactOutLp: BigInt!
+  sender: String!
+}
+
+type Exit @entity {
+  id: ID!
+  hash: String!
+  timestamp: BigInt!
+  block: BigInt!
+  market: String!
+  token0Amount: BigInt!
+  token1Amount: BigInt!
+  exactInLp: BigInt!
+  sender: String!
+}
+
+type Swap @entity {
+  id: ID!
+  hash: String!
+  timestamp: BigInt!
+  block: BigInt!
+  market: String!
+  inToken: String!
+  outToken: String!
+  exactIn: BigInt!
+  exactOut: BigInt!
+  trader: String!
+}
+
+type Forge @entity {
+  id: ID!
+  hash: String!
+  timestamp: BigInt!
+  block: BigInt!
+  forgeAddress: String!
+  forgeId: String!
+}
+
+type YieldContract @entity {
+  id: ID!
+  hash: String!
+  timestamp: BigInt!
+  block: BigInt!
+  forgId: String!
+  expiry: BigInt!
+  underlyingAsset: String!
+  yieldBearingAsset: String!
+  ot: String!
+  xyt: String!
+}
+
+type Mint @entity {
+  id: ID!
+  hash: String!
+  timestamp: BigInt!
+  block: BigInt!
+  forgeId: String!
+  expiry: BigInt!
+  underlyingAsset: String!
+  amountToTokenize: BigInt!
+  amountTokenMinted: BigInt!
+  user: String!
+}
+
+type Redeem @entity {
+  id: ID!
+  hash: String!
+  timestamp: BigInt!
+  block: BigInt!
+  forgeId: String!
+  expiry: BigInt!
+  underlyingAsset: String!
+  amountToRedeem: BigInt!
+  redeemedAmount: BigInt!
+  user: String!
+}
+
+type DebugLog @entity {
+  id: ID!
+  message: String!
 }
